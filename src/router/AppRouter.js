@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Home from "./components/Home";
+import Home from "../components/Home";
 import RedirectPage from "../components/RedirectPage";
 import Dashboard from "../components/Dashboard";
 import NotFoundPage from "../components/NotFoundPage";

@@ -1,17 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "react-bootstrap";
+//import { Button } from "react-bootstrap";
 import Header from "./Header";
 
 const Home = (props) => {
   return (
     <div className="login">
       <Header></Header>
-      <Button variant="info" type="submit">
+      <input type="submit" value="Login to spotify" />
+
+      {/* <Button variant="info" type="submit">
         Login to spotify
-      </Button>
+      </Button> */}
     </div>
   );
 };
 
-export default connect()(Home);
+// todo: use this when adding store
+// export default connect()(Home);
+export default Home;
