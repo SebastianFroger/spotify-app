@@ -1,7 +1,7 @@
 import React from "react";
 
 const RedirectPage = () => {
-  return <div>Redirect Pare</div>;
+  return <div>Redirect Page</div>;
 };
 
 export default RedirectPage;
