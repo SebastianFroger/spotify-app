@@ -1,3 +1,11 @@
+# Spotify App
+
+Personal learning project based on [this tutorial](https://dev.to/myogeshchavan97/how-to-create-a-spotify-music-search-app-in-react-328m)
+
+---
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
