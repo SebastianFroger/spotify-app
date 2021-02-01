@@ -18,10 +18,6 @@ const Home = (props) => {
     <div className="login">
       <Header></Header>
       <input type="submit" value="Login to spotify" onClick={handleLogin} />
-
-      {/* <Button variant="info" type="submit">
-        Login to spotify
-      </Button> */}
     </div>
   );
 };
