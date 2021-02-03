@@ -22,7 +22,7 @@ export const setAuthHeader = () => {
     if (params) {
       axios.defaults.headers.commons[
         "Authorization"
-      ] = `Bearer ${params.access}`;
+      ] = `Bearer ${params.access_token}`;
     }
   } catch (error) {
     console.log("Error setting auth token");
