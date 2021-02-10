@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "./Header";
-import SearchPanel from "./SearchPanel";
+import AlbumsList from "./AlbumsList";
 
 const Dashboard = () => {
   return (
     <div>
       <Header></Header>
-      <SearchPanel></SearchPanel>
+      <AlbumsList></AlbumsList>
     </div>
   );
 };
