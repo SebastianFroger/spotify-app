@@ -7,9 +7,7 @@ export default function AlbumsList() {
 
   return (
     <div className="albums">
-      <Line></Line>
       <SearchPanel></SearchPanel>
-      <Line></Line>
       <p>{albums.albums}</p>
     </div>
   );

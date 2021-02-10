@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Date from "./Date";
 
 export default function SearchPanel() {
   const onDateChange = (date) => {
@@ -7,9 +6,9 @@ export default function SearchPanel() {
   };
 
   return (
-    <div>
+    <div className="search-panel">
       <p>Search releases since</p>
-      <Date onChange={onDateChange}></Date>
+      <input type="date" onChange={onDateChange}></input>
     </div>
   );
 }

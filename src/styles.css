@@ -1,5 +1,6 @@
 :root {
   --main-color: rgb(53, 53, 53);
+  --line-color: rgb(77, 77, 77);
   --sec-color: rgb(114, 161, 120);
   --text-light: whitesmoke;
   --text-dark: black;
@@ -9,15 +10,12 @@
   margin: 0;
   padding: 0;
   color: var(--text-light);
+  text-align: center;
 }
 
 body {
   height: 100%;
   background-color: var(--main-color);
-}
-
-input[type="date"] {
-  color: var(--text-dark);
 }
 
 .header {
@@ -33,8 +31,16 @@ input[type="date"] {
   width: 100%;
 }
 
-.line {
-  width: 80%;
-  border: 1px solid var(--sec-color);
+.search-panel {
+  width: 60%;
+  border-top: 1px solid var(--line-color);
+  border-bottom: 1px solid var(--line-color);
+  padding: 1rem 0rem 1rem 1rem;
   margin: 1rem auto 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.search-panel > input {
+  color: var(--text-dark);
 }
