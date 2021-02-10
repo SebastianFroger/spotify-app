@@ -6,7 +6,6 @@ export default function Date(props) {
       <label>{props.label}</label>
       <input
         type="date"
-        checked={props.checked}
         onChange={(e) => props.onChange(e.target.value)}
       ></input>
     </div>
