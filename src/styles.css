@@ -1,16 +1,23 @@
 :root {
   --main-color: rgb(53, 53, 53);
-  --sec-color: rgb(79, 153, 89);
+  --sec-color: rgb(114, 161, 120);
   --text-light: whitesmoke;
+  --text-dark: black;
 }
 
 * {
   margin: 0;
   padding: 0;
+  color: var(--text-light);
 }
 
 body {
+  height: 100%;
   background-color: var(--main-color);
+}
+
+input[type="date"] {
+  color: var(--text-dark);
 }
 
 .header {
@@ -19,4 +26,15 @@ body {
   color: var(--text-light);
   padding: 1rem 0rem 1rem 1rem;
   width: 100%;
+}
+
+.albums {
+  height: 100%;
+  width: 100%;
+}
+
+.line {
+  width: 80%;
+  border: 1px solid var(--sec-color);
+  margin: 1rem auto 1rem auto;
 }
