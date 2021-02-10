@@ -1,0 +1,22 @@
+:root {
+  --main-color: rgb(53, 53, 53);
+  --sec-color: rgb(79, 153, 89);
+  --text-light: whitesmoke;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--main-color);
+}
+
+.header {
+  background-color: var(--main-color);
+  text-align: left;
+  color: var(--text-light);
+  padding: 1rem 0rem 1rem 1rem;
+  width: 100%;
+}
