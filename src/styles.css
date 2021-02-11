@@ -14,8 +14,18 @@
 }
 
 body {
+  width: 80%;
   height: 100%;
   background-color: var(--main-color);
+  margin: auto;
+}
+p {
+  margin: 1rem;
+}
+
+input {
+  color: var(--text-dark);
+  margin: 1rem;
 }
 
 .header {
@@ -32,15 +42,19 @@ body {
 }
 
 .search-panel {
-  width: 60%;
+  width: 100%;
   border-top: 1px solid var(--line-color);
   border-bottom: 1px solid var(--line-color);
-  padding: 1rem 0rem 1rem 1rem;
-  margin: 1rem auto 1rem auto;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
 }
-.search-panel > input {
-  color: var(--text-dark);
+.search-panel > p {
+  margin-bottom: 0rem; /* remove to avoid double padding */
+}
+
+@media only screen and (max-width: 800px) {
+  body {
+    width: 100%;
+  }
 }
