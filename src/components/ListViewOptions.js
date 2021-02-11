@@ -32,7 +32,6 @@ export default function SearchPanel() {
     <div>
       <Input label="Albums" type="checkbox" onChange={onAlbumsChange}></Input>
       <Input label="Singles" type="checkbox" onChange={onSinglesChange}></Input>
-      <Date label="Since" onChange={onDateChange}></Date>
       <button onClick={onSelectAll}>Select All</button>
       <button onClick={onSelectNone}>Select None</button>
       <button onClick={onSave}>Save</button>
