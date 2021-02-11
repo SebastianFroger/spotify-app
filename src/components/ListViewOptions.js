@@ -1,13 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "./Input";
-import Date from "./Date";
 
-// return an object of settings to use in the search
 export default function SearchPanel() {
-  const onDateChange = (date) => {
-    console.log("onDateChange " + date);
-  };
-
   const onAlbumsChange = (checked) => {
     console.log("onAlbumsChange " + checked);
   };
@@ -16,12 +10,8 @@ export default function SearchPanel() {
     console.log("onSinglesChange " + checked);
   };
 
-  const onSelectAll = () => {
+  const onSelectChange = () => {
     console.log("onSelectAll");
-  };
-
-  const onSelectNone = () => {
-    console.log("onSelectNone");
   };
 
   const onSave = () => {
@@ -29,12 +19,15 @@ export default function SearchPanel() {
   };
 
   return (
-    <div>
-      <Input label="Albums" type="checkbox" onChange={onAlbumsChange}></Input>
-      <Input label="Singles" type="checkbox" onChange={onSinglesChange}></Input>
-      <button onClick={onSelectAll}>Select All</button>
-      <button onClick={onSelectNone}>Select None</button>
-      <button onClick={onSave}>Save</button>
+    <div className="options-container">
+      <div className="options">
+        <button onClick={onAlbumsChange}>Albums</button>
+        <button onClick={onSinglesChange}>Singles</button>
+      </div>
+      <div className="options">
+        <button onClick={onSelectChange}>None</button>
+        <button onClick={onSave}>Save</button>
+      </div>
     </div>
   );
 }

@@ -14,11 +14,13 @@
 }
 
 body {
-  width: 80%;
+  width: 60%;
   height: 100%;
   background-color: var(--main-color);
   margin: auto;
+  width: 100%;
 }
+
 p {
   margin: 1rem;
 }
@@ -26,18 +28,20 @@ p {
 input {
   color: var(--text-dark);
   margin: 1rem;
+  padding: 0.2rem;
+}
+
+button {
+  color: var(--text-dark);
+  margin: 0.5rem;
+  padding: 0.2rem;
 }
 
 .header {
   background-color: var(--main-color);
   text-align: left;
   color: var(--text-light);
-  padding: 1rem 0rem 1rem 1rem;
-  width: 100%;
-}
-
-.albums {
-  height: 100%;
+  padding: 1rem 0rem 1rem 0rem;
   width: 100%;
 }
 
@@ -49,8 +53,30 @@ input {
   flex-direction: column;
   align-items: center;
 }
+
 .search-panel > p {
   margin-bottom: 0rem; /* remove to avoid double padding */
+}
+
+.options-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.options {
+  max-width: 40%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.options > button {
+  flex-grow: 1;
+  max-width: 10rem;
 }
 
 @media only screen and (max-width: 800px) {
