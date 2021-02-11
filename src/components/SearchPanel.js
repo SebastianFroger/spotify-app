@@ -6,7 +6,7 @@ export default function SearchPanel() {
   };
 
   return (
-    <div className="search-panel">
+    <div className="search-panel content">
       <p>Search releases since</p>
       <input type="date" onChange={onDateChange}></input>
     </div>

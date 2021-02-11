@@ -1,12 +1,18 @@
 import React from "react";
 import Header from "./Header";
-import AlbumsList from "./AlbumsList";
+import SearchPanel from "./SearchPanel";
+import ListViewOptions from "./ListViewOptions";
+import ListView from "./ListView";
+
+// lift search result here and pass it on to listview
 
 const Dashboard = () => {
   return (
     <div>
       <Header></Header>
-      <AlbumsList></AlbumsList>
+      <SearchPanel></SearchPanel>
+      <ListViewOptions></ListViewOptions>
+      <ListView></ListView>
     </div>
   );
 };
