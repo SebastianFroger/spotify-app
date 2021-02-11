@@ -1,5 +1,4 @@
 import React from "react";
-import Input from "./Input";
 
 export default function SearchPanel() {
   const onAlbumsChange = (checked) => {
@@ -19,7 +18,7 @@ export default function SearchPanel() {
   };
 
   return (
-    <div className="options-container">
+    <div className="options-container content">
       <div className="options">
         <button onClick={onAlbumsChange}>Albums</button>
         <button onClick={onSinglesChange}>Singles</button>

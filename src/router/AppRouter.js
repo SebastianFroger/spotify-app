@@ -10,7 +10,7 @@ class AppRouter extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="main">
+        <div>
           <Switch>
             <Route path="/" component={Home} exact={true}></Route>
             <Route path="/redirect" component={RedirectPage}></Route>
