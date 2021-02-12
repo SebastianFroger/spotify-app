@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SearchPanel() {
+export default function AlbumsListOptions() {
   const onAlbumsChange = (checked) => {
     console.log("onAlbumsChange " + checked);
   };
