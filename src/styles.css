@@ -91,6 +91,15 @@ button {
   background-color: var(--main-color-light);
 }
 
+.album-card > div {
+  display: flex;
+}
+
+.play-icon {
+  width: 8%;
+  fill: var(--main-color);
+}
+
 .content {
   max-width: 75rem;
 }

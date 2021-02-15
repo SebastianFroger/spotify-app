@@ -1,10 +1,17 @@
 import React from "react";
+import { ReactComponent as PlayButton } from "../images/play-solid.svg";
 
-export default function SearchPanel() {
+export default function AlbumCard(props) {
   return (
     <div className="album-card content">
-      <h1>picture</h1>
-      <p>Name title etc</p>
+      <img src={props.cover} alt="cover" />
+      <div>
+        <div>
+          <p>{props.artist}</p>
+          <p>{props.album}</p>
+        </div>
+        <PlayButton className="play-icon"></PlayButton>
+      </div>
     </div>
   );
 }
