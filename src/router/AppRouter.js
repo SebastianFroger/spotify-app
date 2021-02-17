@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Home from "../components/Home";
 import RedirectPage from "../components/RedirectPage";
-import Dashboard from "../components/Dashboard";
+import App from "../components/App";
 import NotFoundPage from "../components/NotFoundPage";
 
 class AppRouter extends React.Component {
@@ -14,7 +14,7 @@ class AppRouter extends React.Component {
           <Switch>
             <Route path="/" component={Home} exact={true}></Route>
             <Route path="/redirect" component={RedirectPage}></Route>
-            <Route path="/dashboard" component={Dashboard}></Route>
+            <Route path="/app" component={App}></Route>
             <Route component={NotFoundPage}></Route>
           </Switch>
         </div>
