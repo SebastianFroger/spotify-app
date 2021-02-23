@@ -1,4 +1,4 @@
-export async function getUser() {
+export async function fetchUser() {
   const url = "https://api.spotify.com/v1/me";
   const params = JSON.parse(localStorage.getItem("params"));
 
