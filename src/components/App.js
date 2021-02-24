@@ -4,8 +4,6 @@ import SearchPanel from "./SearchPanel";
 import AlbumsListOptions from "./AlbumsListOptions";
 import AlbumsList from "./AlbumsList";
 
-// lift search result here and pass it on to listview
-
 class App extends Component {
   render() {
     return (

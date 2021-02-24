@@ -1,22 +1,10 @@
 import React from "react";
 import Header from "./Header";
 
-const Home = (props) => {
-  const {
-    REACT_APP_CLIENT_ID,
-    REACT_APP_AUTHORIZE_URL,
-    REACT_APP_REDIRECT_URL,
-    REACT_APP_SCOPES,
-  } = process.env;
-
-  const handleLogin = () => {
-    window.location = `${REACT_APP_AUTHORIZE_URL}?client_id=${REACT_APP_CLIENT_ID}&scope=${REACT_APP_SCOPES}&redirect_uri=${REACT_APP_REDIRECT_URL}&response_type=token&show_dialog=true`;
-  };
-
+const Home = () => {
   return (
     <div className="login">
       <Header></Header>
-      <input type="submit" value="Login to spotify" onClick={handleLogin} />
     </div>
   );
 };
