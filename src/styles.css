@@ -40,10 +40,23 @@ button {
 
 .header {
   background-color: var(--main-color);
-  text-align: left;
   color: var(--text-light);
   padding: 1rem 0rem 1rem 0rem;
   width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.header > div > p {
+  margin-top: 0rem;
+  padding: 0rem;
+}
+
+.userinfo {
+  height: 3rem;
+  border: 1px solid var(--line-color);
+  border-radius: 50%;
 }
 
 .search-panel {
