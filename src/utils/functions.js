@@ -18,7 +18,7 @@ export function handleLogout() {
   console.log("Auto log out");
 }
 
-export class CookieDataHandler {
+export class CookieDateHandler {
   static _name = "updatify_last_visit";
 
   static getLastVisit() {
@@ -30,8 +30,11 @@ export class CookieDataHandler {
   }
 
   static setLastVisit() {
-    const date = new Date().toISOString().slice(0, 10);
-    document.cookie = `${this._name}=${date}`;
+    document.cookie = `${this._name}=${this.getDate()}`;
     return document.cookie.split("=")[1];
+  }
+
+  static getDate() {
+    return new Date().toISOString().slice(0, 10);
   }
 }
