@@ -58,7 +58,7 @@ body {
 }
 
 .logo-img {
-  width: 3rem;
+  width: 4rem;
   fill: var(--text-light);
   transform: rotate(180deg);
 }
@@ -115,6 +115,11 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+select,
+option {
+  color: var(--text-dark);
 }
 
 /* ====================== Album list and card ====================== */
@@ -224,5 +229,17 @@ button {
 
   .content {
     max-width: 100%;
+  }
+
+  .logo-img {
+    width: 2rem;
+  }
+
+  .header > h1 {
+    font-size: 2rem;
+  }
+
+  .log-out-btn > img {
+    height: 2rem;
   }
 }
