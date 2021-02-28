@@ -23,7 +23,7 @@ export default function AlbumsListOptions() {
 
   return (
     <div className="options-container content">
-      <select name="time">
+      <select className="drop-down" name="time">
         <option value="last">Released since last visit</option>
         <option value="week">Released last week</option>
         <option value="month">Released last month</option>
