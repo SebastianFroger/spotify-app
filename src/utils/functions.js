@@ -22,12 +22,11 @@ export class CookieDataHandler {
   static _name = "updatify_last_visit";
 
   static getLastVisit() {
-    const cookies = document.cookie.split(";");
-    const cookie = cookies.find((item) =>
-      item.trim().startsWith(`${this._name}=`)
-    );
+    const cookie = document.cookie
+      .split(";")
+      .find((item) => item.trim().startsWith(`${this._name}=`));
     if (cookie === undefined) return this.setLastVisit();
-    return cookie;
+    return cookie.split("=")[1];
   }
 
   static setLastVisit() {
