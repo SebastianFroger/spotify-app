@@ -4,7 +4,7 @@
   --main-color: rgb(41, 41, 41);
   --main-color-light: rgb(78, 78, 78);
   --line-color: rgb(78, 78, 78);
-  --sec-color: #1ed760;
+  --sec-color: #30b960;
   --text-light: rgb(255, 255, 255);
   --text-dark: rgb(0, 0, 0);
   --border-corner-radius: 2px;
@@ -120,6 +120,10 @@ button {
 .drop-down {
   color: var(--text-dark);
   max-height: initial;
+}
+
+.drop-down > * {
+  color: var(--text-dark);
 }
 
 /* ====================== Album list and card ====================== */

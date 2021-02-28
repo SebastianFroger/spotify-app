@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { fetchUser } from "../utils/fetchData";
+import { handleLogout } from "../utils/functions";
 import userIcon from "../images/user-solid.svg";
 
 export default function LogoutButton() {
-  const history = useHistory();
+  // const history = useHistory();
   const [userImg, setUserImg] = useState("Username");
 
   useEffect(() => {
@@ -18,10 +19,10 @@ export default function LogoutButton() {
       });
   }, []);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    history.push("/");
-  };
+  // const handleLogout = () => {
+  //   localStorage.clear();
+  //   history.push("/");
+  // };
 
   return (
     <div className="log-out-btn">
