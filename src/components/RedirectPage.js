@@ -1,9 +1,5 @@
 import _ from "lodash";
-import {
-  getUrlParams,
-  handleLogout,
-  CookieDataHandler,
-} from "../utils/functions";
+import { getUrlParams, handleLogout } from "../utils/functions";
 import React from "react";
 
 export default class RedirectPage extends React.Component {
