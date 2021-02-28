@@ -24,12 +24,12 @@ export default function AlbumsListOptions() {
   return (
     <div className="options-container content">
       <select className="drop-down" name="time">
-        <option value="last">Released since last visit</option>
-        <option value="week">Released last week</option>
-        <option value="month">Released last month</option>
-        <option value="quarter">Released last 3 month</option>
-        <option value="half">Released last 6 month</option>
-        <option value="year">Released last year</option>
+        <option value="last">Releases since last visit</option>
+        <option value="week">Releases last week</option>
+        <option value="month">Releases last month</option>
+        <option value="quarter">Releases last 3 month</option>
+        <option value="half">Releases last 6 month</option>
+        <option value="year">Releases last year</option>
       </select>
       <ToggleButton
         title={"Albums"}
