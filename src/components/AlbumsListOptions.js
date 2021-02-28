@@ -1,12 +1,16 @@
-import React from "react";
+import { React, useState } from "react";
+import ToggleButton from "./ToggleButton";
 
 export default function AlbumsListOptions() {
-  const onAlbumsChange = (checked) => {
-    console.log("onAlbumsChange " + checked);
+  const [albums, setAlbums] = useState(true);
+  const [singles, setSingles] = useState(false);
+
+  const onAlbumsChange = () => {
+    setAlbums(!albums);
   };
 
-  const onSinglesChange = (checked) => {
-    console.log("onSinglesChange " + checked);
+  const onSinglesChange = () => {
+    setSingles(!singles);
   };
 
   const onSelectChange = () => {
@@ -19,14 +23,26 @@ export default function AlbumsListOptions() {
 
   return (
     <div className="options-container content">
-      <div className="options">
-        <button onClick={onAlbumsChange}>Albums</button>
-        <button onClick={onSinglesChange}>Singles</button>
-      </div>
-      <div className="options">
-        <button onClick={onSelectChange}>None</button>
-        <button onClick={onSave}>Save</button>
-      </div>
+      <select name="time">
+        <option value="last">Released since last visit</option>
+        <option value="week">Released last week</option>
+        <option value="month">Released last month</option>
+        <option value="quarter">Released last 3 month</option>
+        <option value="half">Released last 6 month</option>
+        <option value="year">Released last year</option>
+      </select>
+      <ToggleButton
+        title={"Albums"}
+        enabled={albums}
+        handleClick={onAlbumsChange}
+      />
+      <ToggleButton
+        title={"Singles"}
+        enabled={singles}
+        handleClick={onSinglesChange}
+      />
+      <button onClick={onSelectChange}>Select All</button>
+      <button onClick={onSave}>Save</button>
     </div>
   );
 }

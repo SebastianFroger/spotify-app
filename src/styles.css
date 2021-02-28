@@ -1,20 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap");
+
 :root {
-  --main-color: rgb(53, 53, 53);
-  --main-color-light: rgb(71, 71, 71);
-  --line-color: rgb(77, 77, 77);
-  --sec-color: rgb(114, 161, 120);
-  --text-light: whitesmoke;
-  --text-dark: black;
+  --main-color: rgb(41, 41, 41);
+  --main-color-light: rgb(78, 78, 78);
+  --line-color: rgb(78, 78, 78);
+  --sec-color: #1ed760;
+  --text-light: rgb(255, 255, 255);
+  --text-dark: rgb(0, 0, 0);
+  --border-corner-radius: 2px;
+  --title-font: "Londrina Outline";
 }
 
 * {
   margin: auto;
   padding: 0;
   color: var(--text-light);
-  text-align: center;
 
+  text-align: center;
   font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Londrina Outline",
+    cursive;
 }
 
 body {
@@ -22,91 +27,109 @@ body {
   background-color: var(--main-color);
 }
 
-p {
-  margin: 1rem 0rem 1rem 0rem;
+/* ============================ Home page ============================ */
+
+.login {
+  color: var(--text-dark);
 }
 
-input {
-  color: var(--text-dark);
-  margin: 1rem 0rem 1rem 0rem;
-  padding: 0.2rem;
+.login > * {
+  margin: 3rem;
 }
 
-button {
+.login > input {
   color: var(--text-dark);
-  margin: 0.5rem;
-  padding: 0.2rem;
+  height: 2rem;
+  width: 5rem;
 }
+
+/* ============================ Header ============================ */
 
 .header {
-  background-color: var(--main-color);
+  background-color: transparent;
   color: var(--text-light);
   padding: 1rem 0rem 1rem 0rem;
   width: 100%;
 
+  border-bottom: 1px solid var(--main-color-light);
+  margin-bottom: 1rem;
+
   display: flex;
-  justify-content: space-between;
 }
 
-.header > div > p {
-  margin-top: 0rem;
-  padding: 0rem;
+.logo-img {
+  width: 3rem;
+  fill: var(--text-light);
+  transform: rotate(180deg);
 }
 
-.userinfo {
+.header > h1 {
+  margin-left: 1rem;
+  font-family: var(--title-font);
+  font-weight: 400;
+  font-size: 4rem;
+}
+
+.log-out-btn {
+  margin-right: 1rem;
+}
+
+.log-out-btn > img {
   height: 3rem;
   border: 1px solid var(--line-color);
   border-radius: 50%;
 }
 
-.search-panel {
-  width: 100%;
-  border-top: 1px solid var(--line-color);
-  border-bottom: 1px solid var(--line-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.log-out-btn > p {
+  margin: 0rem;
+  padding: 0rem;
 }
 
-.search-panel > p {
-  margin-bottom: 0rem; /* remove to avoid double padding */
-}
+/* ============================ Options ============================ */
 
 .options-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 
-.options {
-  max-width: 40%;
-  display: flex;
-  flex-direction: row;
+.options-container > * {
+  margin: 0.1rem;
+  padding: 0.4rem;
+  overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 1;
+  max-height: 1rem;
+  width: 20%;
+}
+
+button {
+  all: unset;
+
+  color: var(--text-light);
+  background-color: transparent;
+
+  padding: 1rem;
+
+  border: 1px solid var(--line-color);
+  border-radius: var(--border-corner-radius);
+
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-grow: 1;
 }
 
-.options > button {
-  flex-grow: 1;
-  max-width: 10rem;
-}
+/* ====================== Album list and card ====================== */
 
 .albums-list {
   margin-top: 2rem;
   width: 100%;
   height: 100%;
   display: flex;
-  /* flex-direction: row; */
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
 .album-card {
-  border: 1px solid grey;
-  border-radius: 3px;
-  background-color: var(--main-color-light);
+  background-color: transparent;
   margin: 1rem;
   padding: 1rem;
   width: 18%;
@@ -118,8 +141,6 @@ button {
 
 .img-container > img {
   width: 100%;
-  border: 1px solid grey;
-  border-radius: 3px;
 }
 
 .album-card > div {
@@ -127,27 +148,68 @@ button {
   display: flex;
 }
 
-.album-card > div > p {
-  width: 100%;
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-bottom > * {
+  margin: 0;
+  padding-top: 1rem;
+}
+
+.card-bottom > div > p {
   text-align: left;
+  color: var(--text-light);
 }
 
 .play-button {
   width: 8%;
-  fill: var(--main-color);
-}
-
-.content {
-  max-width: 75rem;
+  margin: auto;
+  fill: var(--main-color-light);
 }
 
 .card-selected {
   box-shadow: 0 0 1rem 0.5rem var(--sec-color);
 }
 
-.playing {
+/* ====================== Dynamic options ====================== */
+
+.content {
+  max-width: 75rem;
+}
+
+.active-svg {
   fill: var(--sec-color);
 }
+
+.active-btn {
+  background-color: var(--sec-color);
+  border: 1px solid var(--sec-color);
+}
+
+.pulse {
+  animation: pulse 2s 1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+/* ====================== media options ====================== */
 
 @media only screen and (max-width: 1000px) {
   .album-card {
@@ -158,5 +220,9 @@ button {
 @media only screen and (max-width: 800px) {
   .album-card {
     width: 40%;
+  }
+
+  .content {
+    max-width: 100%;
   }
 }

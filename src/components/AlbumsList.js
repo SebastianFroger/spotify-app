@@ -11,6 +11,16 @@ export default function AlbumsList() {
         artist={albumData.artists[0].name}
         album={albumData.name}
       ></AlbumCard>
+      <AlbumCard
+        cover={albumData.images[1].url}
+        artist={albumData.artists[0].name}
+        album={albumData.name}
+      ></AlbumCard>
+      <AlbumCard
+        cover={albumData.images[1].url}
+        artist={albumData.artists[0].name}
+        album={albumData.name}
+      ></AlbumCard>
     </div>
   );
 }
