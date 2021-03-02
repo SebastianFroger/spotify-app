@@ -2,7 +2,7 @@ import React from "react";
 import ToggleButton from "./ToggleButton";
 
 export default function AlbumsListOptions(props) {
-  const { showAlbums, showSingles } = props.options;
+  const { showAlbums, showSingles, selectAll } = props.options;
 
   const onAlbumsChange = () => {
     props.callback({ ...props.options, showAlbums: !showAlbums });
@@ -12,8 +12,8 @@ export default function AlbumsListOptions(props) {
     props.callback({ ...props.options, showSingles: !showSingles });
   };
 
-  const onSelectChange = () => {
-    console.log("onSelectAll");
+  const onSelectAllChange = () => {
+    props.callback({ ...props.options, selectAll: !selectAll });
   };
 
   const onSave = () => {
@@ -40,7 +40,11 @@ export default function AlbumsListOptions(props) {
         enabled={showSingles}
         handleClick={onSinglesChange}
       />
-      <button onClick={onSelectChange}>Select All</button>
+      <ToggleButton
+        title={"Select All"}
+        enabled={selectAll}
+        handleClick={onSelectAllChange}
+      />
       <button onClick={onSave}>Save</button>
     </div>
   );
