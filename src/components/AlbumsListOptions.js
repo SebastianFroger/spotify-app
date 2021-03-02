@@ -2,7 +2,13 @@ import React from "react";
 import ToggleButton from "./ToggleButton";
 
 export default function AlbumsListOptions(props) {
-  const { lastVisitDate, showAlbums, showSingles, selectAll } = props.options;
+  const {
+    todayDate,
+    searchDate,
+    showAlbums,
+    showSingles,
+    selectAll,
+  } = props.options;
 
   const onAlbumsChange = () => {
     props.callback({ ...props.options, showAlbums: !showAlbums });
@@ -25,19 +31,13 @@ export default function AlbumsListOptions(props) {
   };
 
   return (
-    <div className="options-container content">
-      <select
+    <div className="options-container">
+      <input
         onChange={onDateChange}
-        className="drop-down"
-        name="dateSelection"
-      >
-        <option value="last">Since {lastVisitDate}</option>
-        <option value="2week">Last 2 weeks</option>
-        <option value="1month">Last 1 month</option>
-        <option value="3month">Last 3 month</option>
-        <option value="6month">Last 6 month</option>
-        <option value="12month">Last year</option>
-      </select>
+        type="date"
+        value={searchDate}
+        max={todayDate}
+      ></input>
       <ToggleButton
         title={"Albums"}
         enabled={showAlbums}

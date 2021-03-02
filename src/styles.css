@@ -117,12 +117,7 @@ button {
   justify-content: center;
 }
 
-.drop-down {
-  color: var(--text-dark);
-  max-height: initial;
-}
-
-.drop-down > * {
+.options-container > input {
   color: var(--text-dark);
 }
 
