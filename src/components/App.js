@@ -8,6 +8,10 @@ import { fetchFollowedArtists } from "../utils/fetchData";
 export default function App() {
   const [date, setDate] = useState();
   const [artists, setArtists] = useState();
+  const [options, setOptions] = useState({
+    showAlbums: true,
+    showSingles: false,
+  });
 
   useEffect(() => {
     setDate(CookieDateHandler.getLastVisit());
@@ -17,7 +21,10 @@ export default function App() {
   return (
     <div>
       <Header></Header>
-      <AlbumsListOptions></AlbumsListOptions>
+      <AlbumsListOptions
+        options={options}
+        callback={setOptions}
+      ></AlbumsListOptions>
       <AlbumsList></AlbumsList>
     </div>
   );

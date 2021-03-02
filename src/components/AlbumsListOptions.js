@@ -1,16 +1,15 @@
-import { React, useState } from "react";
+import React from "react";
 import ToggleButton from "./ToggleButton";
 
-export default function AlbumsListOptions() {
-  const [albums, setAlbums] = useState(true);
-  const [singles, setSingles] = useState(false);
+export default function AlbumsListOptions(props) {
+  const { showAlbums, showSingles } = props.options;
 
   const onAlbumsChange = () => {
-    setAlbums(!albums);
+    props.callback({ ...props.options, showAlbums: !showAlbums });
   };
 
   const onSinglesChange = () => {
-    setSingles(!singles);
+    props.callback({ ...props.options, showSingles: !showSingles });
   };
 
   const onSelectChange = () => {
@@ -33,12 +32,12 @@ export default function AlbumsListOptions() {
       </select>
       <ToggleButton
         title={"Albums"}
-        enabled={albums}
+        enabled={showAlbums}
         handleClick={onAlbumsChange}
       />
       <ToggleButton
         title={"Singles"}
-        enabled={singles}
+        enabled={showSingles}
         handleClick={onSinglesChange}
       />
       <button onClick={onSelectChange}>Select All</button>
