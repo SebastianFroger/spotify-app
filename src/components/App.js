@@ -7,6 +7,7 @@ import { fetchFollowedArtists } from "../utils/fetchData";
 
 export default function App() {
   const [data, setData] = useState({
+    lastVisitDate: null,
     searchDate: null,
     showAlbums: true,
     showSingles: false,
@@ -17,7 +18,7 @@ export default function App() {
   useEffect(() => {
     const date = CookieDateHandler.getLastVisit();
     fetchFollowedArtists().then((res) =>
-      setData({ ...data, searchDate: date, artists: res })
+      setData({ ...data, lastVisitDate: date, artists: res })
     );
   }, []);
 
