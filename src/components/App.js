@@ -6,26 +6,26 @@ import { CookieDateHandler } from "../utils/cookieDateHandler";
 import { fetchFollowedArtists } from "../utils/fetchData";
 
 export default function App() {
-  const [date, setDate] = useState();
-  const [artists, setArtists] = useState();
-  const [options, setOptions] = useState({
+  const [data, setData] = useState({
+    searchDate: null,
     showAlbums: true,
     showSingles: false,
+    selectAll: false,
+    artists: null,
   });
 
   useEffect(() => {
-    setDate(CookieDateHandler.getLastVisit());
-    fetchFollowedArtists().then((res) => setArtists(res));
+    const date = CookieDateHandler.getLastVisit();
+    fetchFollowedArtists().then((res) =>
+      setData({ ...data, searchDate: date, artists: res })
+    );
   }, []);
 
   return (
     <div>
       <Header></Header>
-      <AlbumsListOptions
-        options={options}
-        callback={setOptions}
-      ></AlbumsListOptions>
-      <AlbumsList></AlbumsList>
+      <AlbumsListOptions options={data} callback={setData}></AlbumsListOptions>
+      <AlbumsList options={data}></AlbumsList>
     </div>
   );
 }

@@ -22,8 +22,8 @@ export default function AlbumsListOptions(props) {
 
   return (
     <div className="options-container content">
-      <select className="drop-down" name="time">
-        <option value="last">Releases since last visit</option>
+      <select className="drop-down" name="dateSelection">
+        <option value="last">Since last visit</option>
         <option value="week">Releases last week</option>
         <option value="month">Releases last month</option>
         <option value="quarter">Releases last 3 month</option>
