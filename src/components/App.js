@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+
 import Header from "./Header";
 import AlbumsListOptions from "./AlbumsListOptions";
 import AlbumsList from "./AlbumsList";
+
 import { CookieDateHandler } from "../utils/cookieDateHandler";
 import { fetchFollowedArtists } from "../utils/fetchData";
 

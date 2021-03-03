@@ -63,11 +63,14 @@ body {
   transform: rotate(180deg);
 }
 
-.header > h1 {
-  margin-left: 1rem;
+.title {
   font-family: var(--title-font);
   font-weight: 400;
   font-size: 4rem;
+}
+
+.header > h1 {
+  margin-left: 1rem;
 }
 
 .log-out-btn {
@@ -240,5 +243,9 @@ button {
 
   .log-out-btn > img {
     height: 2rem;
+  }
+
+  .title {
+    font-size: 2rem;
   }
 }

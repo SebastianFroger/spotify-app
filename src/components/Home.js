@@ -1,5 +1,7 @@
 import React from "react";
 
+import Title from "./Title";
+
 const {
   REACT_APP_CLIENT_ID,
   REACT_APP_AUTHORIZE_URL,
@@ -14,7 +16,7 @@ const handleLogin = () => {
 const Home = () => {
   return (
     <div className="login">
-      <h1>Updatify</h1>
+      <Title></Title>
       <p>Keep updated on the latest releases from your favorite artists!</p>
       <input type="submit" value="Log in" onClick={handleLogin} />
     </div>
