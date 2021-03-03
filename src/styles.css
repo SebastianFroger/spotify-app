@@ -55,6 +55,7 @@ body {
   margin-bottom: 1rem;
 
   display: flex;
+  justify-content: space-between;
 }
 
 .logo-img {
@@ -64,13 +65,14 @@ body {
 }
 
 .title {
+  margin-left: 1rem;
+}
+
+.title > h1 {
+  margin-left: 1rem;
   font-family: var(--title-font);
   font-weight: 400;
   font-size: 4rem;
-}
-
-.header > h1 {
-  margin-left: 1rem;
 }
 
 .log-out-btn {
@@ -233,19 +235,19 @@ button {
     max-width: 100%;
   }
 
-  .logo-img {
-    width: 2rem;
-  }
-
   .header > h1 {
     font-size: 2rem;
   }
 
-  .log-out-btn > img {
-    height: 2rem;
+  .logo-img {
+    width: 3rem;
   }
 
-  .title {
-    font-size: 2rem;
+  .title > h1 {
+    font-size: 3rem;
+  }
+
+  .log-out-btn > img {
+    height: 2rem;
   }
 }

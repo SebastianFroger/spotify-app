@@ -31,7 +31,7 @@ export default function AlbumsListOptions(props) {
   };
 
   return (
-    <div className="options-container">
+    <div className="options-container content">
       <input
         onChange={onDateChange}
         type="date"
