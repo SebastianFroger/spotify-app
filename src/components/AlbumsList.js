@@ -15,21 +15,17 @@ export default function AlbumsList() {
     showSingles: false,
     selectAll: false,
   });
-  const [req, setReq] = useState({
-    artists: null,
-    status: true,
-  });
+  const [req, setReq] = useState();
 
   useEffect(() => {
-    setReq({ ...req, status: "loading" });
+    setReq("loading");
 
     fetchFollowedArtists().then((res) => {
-      console.log(res);
-      setReq({ artists: res, status: "ready" });
+      setReq(res);
     });
   }, []);
 
-  if (req.status === "loading") {
+  if (req === "loading") {
     return (
       <div>
         <AlbumsListOptions
@@ -39,9 +35,7 @@ export default function AlbumsList() {
         <p>Loading...</p>
       </div>
     );
-  }
-
-  if (req.status === "ready" && req.artists !== null) {
+  } else if (req !== null && req !== undefined) {
     return (
       <div>
         <AlbumsListOptions
@@ -49,7 +43,7 @@ export default function AlbumsList() {
           callback={setOptions}
         ></AlbumsListOptions>
         <div className="albums-list content">
-          {req.artists.map((album, i) => (
+          {req.map((album, i) => (
             <AlbumCard key={i} album={album}></AlbumCard>
           ))}
         </div>
