@@ -94,6 +94,7 @@ body {
 
 .options-container {
   display: flex;
+  margin-bottom: 2rem;
 }
 
 .options-container > * {
@@ -129,7 +130,6 @@ button {
 /* ====================== Album list and card ====================== */
 
 .albums-list {
-  margin-top: 2rem;
   width: 100%;
   height: 100%;
   display: flex;

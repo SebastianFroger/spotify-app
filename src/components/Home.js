@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div className="login">
       <Title></Title>
-      <p>Keep updated on the latest releases from your favorite artists!</p>
+      <p>Stay updated on the latest releases from your favorite artists!</p>
       <input type="submit" value="Log in" onClick={handleLogin} />
     </div>
   );
