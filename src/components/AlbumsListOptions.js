@@ -11,23 +11,23 @@ export default function AlbumsListOptions(props) {
   } = props.options;
 
   const onAlbumsChange = () => {
-    props.callback({ ...props.options, showAlbums: !showAlbums });
+    props.callback({ showAlbums: !showAlbums });
   };
 
   const onSinglesChange = () => {
-    props.callback({ ...props.options, showSingles: !showSingles });
+    props.callback({ showSingles: !showSingles });
   };
 
   const onSelectAllChange = () => {
-    props.callback({ ...props.options, selectAll: !selectAll });
+    props.callback({ selectAll: !selectAll });
   };
 
   const onDateChange = (e) => {
-    props.callback({ ...props.options, searchDate: e.target.value });
+    props.callback({ searchDate: e.target.value });
   };
 
   const onSave = () => {
-    console.log("onSave");
+    props.onSave();
   };
 
   return (

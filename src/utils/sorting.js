@@ -1,20 +1,20 @@
 export default class Sorting {
-  //   static sortArtistsByName(artists) {
-  //     // sort by name
-  //     return artists.sort((a, b) => {
-  //       var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-  //       var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-  //       if (nameA < nameB) {
-  //         return -1;
-  //       }
-  //       if (nameA > nameB) {
-  //         return 1;
-  //       }
+  static sortArtistsByName(artists) {
+    // sort by name
+    return artists.sort((a, b) => {
+      var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
 
-  //       // names must be equal
-  //       return 0;
-  //     });
-  //   }
+      // names must be equal
+      return 0;
+    });
+  }
 
   static sortAlbumsReleasedSince(artists, albums, date) {
     for (let i = artists.length - 1; i >= 0; i--) {

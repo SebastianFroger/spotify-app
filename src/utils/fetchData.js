@@ -46,8 +46,38 @@ export async function fetchFollowedArtists() {
 
     return stored;
   } catch (err) {
-    console.log("could not fetch followed artists");
+    console.log("error fetching followed artists");
     console.log(err);
     return err;
   }
+}
+
+export async function fetchAlbums(artistId, searchDate, offset = 0) {
+  // set fetch params first
+  const params = JSON.parse(localStorage.getItem("params"));
+  const url = new URL(`https://api.spotify.com/v1/artists/${artistId}/albums`);
+  url.searchParams.append("type", artistId);
+  url.searchParams.append("include_groups", "album,single,");
+  url.searchParams.append("offset", offset);
+  url.searchParams.append("limit", 1);
+  url.searchParams.append("market", "from_token");
+  const header = { Authorization: "Bearer " + params.access_token };
+
+  // do a recursive call
+  const fetchData = async (url, searchDate, result = []) => {
+    try {
+      const response = await fetch(url, { headers: header });
+      const data = await response.json();
+      result.push(data.items[0]);
+
+      if (data.next !== null && data.items[0].release_date > searchDate) {
+        return fetchData(data.next, searchDate, result);
+      }
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return await fetchData(url, searchDate);
 }
