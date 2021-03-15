@@ -2,28 +2,27 @@ import React from "react";
 import ToggleButton from "./ToggleButton";
 
 export default function AlbumsListOptions(props) {
-  const {
-    todayDate,
-    searchDate,
-    showAlbums,
-    showSingles,
-    selectAll,
-  } = props.options;
+  const options = props.options;
 
   const onAlbumsChange = () => {
-    props.callback({ showAlbums: !showAlbums });
+    options.showAlbums = !options.showAlbums;
+    props.callback(options);
   };
 
   const onSinglesChange = () => {
-    props.callback({ showSingles: !showSingles });
+    options.showSingles = !options.showSingles;
+    props.callback(options);
   };
 
   const onSelectAllChange = () => {
-    props.callback({ selectAll: !selectAll });
+    options.selectAll = !options.selectAll;
+    props.callback(options);
   };
 
   const onDateChange = (e) => {
-    props.callback({ searchDate: e.target.value });
+    if (e.target.value === options.searchDate) return;
+    options.searchDate = e.target.value;
+    props.callback(options);
   };
 
   const onSave = () => {
@@ -33,24 +32,24 @@ export default function AlbumsListOptions(props) {
   return (
     <div className="options-container content">
       <input
-        onChange={onDateChange}
+        change={onDateChange}
         type="date"
-        value={searchDate}
-        max={todayDate}
+        value={options.searchDate}
+        max={options.todayDate}
       ></input>
       <ToggleButton
         title={"Albums"}
-        enabled={showAlbums}
+        enabled={options.showAlbums}
         handleClick={onAlbumsChange}
       />
       <ToggleButton
         title={"Singles"}
-        enabled={showSingles}
+        enabled={options.showSingles}
         handleClick={onSinglesChange}
       />
       <ToggleButton
-        title={"Select All"}
-        enabled={selectAll}
+        title={options.selectAll ? "None" : "All"}
+        enabled={options.selectAll}
         handleClick={onSelectAllChange}
       />
       <button onClick={onSave}>Save</button>
