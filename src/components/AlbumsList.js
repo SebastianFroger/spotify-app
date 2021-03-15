@@ -20,7 +20,7 @@ export default class AlbumsList extends React.Component {
         showSingles: false,
         selectAll: false,
       },
-      status: "loading",
+      status: "Loading...",
       artists: null,
     };
   }
@@ -31,38 +31,52 @@ export default class AlbumsList extends React.Component {
   }
 
   async getAlbums() {
-    this.setState({ status: "fetching followed artists" });
+    this.setState({ status: "Fetching followed artists..." });
 
     // get and sort artists by name
     if (this.state.artists === null) {
       const unsorted = await fetchFollowedArtists();
       const sorted = Sorting.sortArtistsByName(unsorted);
-      this.setState({ artists: sorted.slice(0, 5) });
+      this.setState({ artists: sorted.slice(0, 10) });
     }
 
-    // TODO: find way to call this one at the time.... something with Promise()
+    // get albums until a certain date
+    this.setState({ status: "Fetching albums..." });
+
     const artistsCopy = this.state.artists.slice();
     console.log("artists", artistsCopy);
 
-    const result = artistsCopy.map(async (artist) => {
+    artistsCopy.map(async (artist, index) => {
       if (!artist.albums) {
         artist.albums = [];
       }
 
-      artist.albums = await fetchAlbums(
+      const newAlbums = await fetchAlbums(
         artist.id,
-        // this.state.options.searchDate,
-        "2000_01_01",
+        this.state.options.searchDate,
         artist.albums.length
       );
-    });
 
-    console.log("result", result);
+      console.log("fetched albums", newAlbums);
+
+      if (newAlbums.length > 0) {
+        let newArtist = { ...artist };
+        newArtist.albums = artist.albums.concat(newAlbums);
+
+        let newArtists = [...this.state.artists];
+        newArtists[index] = newArtist;
+        this.setState({ artists: newArtists, status: "Ready" });
+      }
+    });
   }
 
-  onOptionsChange = (e) => {
-    console.log("options changed", e);
-    this.setState(e);
+  onOptionsChange = (options) => {
+    console.log("options changed", options);
+    this.setState({ ...this.state, options: options });
+
+    if (this.state.options.searchDate !== options.searchDate) {
+      this.getAlbums();
+    }
   };
 
   onSaveSelected = (e) => {
@@ -78,7 +92,7 @@ export default class AlbumsList extends React.Component {
             callback={this.onOptionsChange}
             onSave={this.onSaveSelected}
           ></AlbumsListOptions>
-          <p>{this.state.status + "..."} </p>
+          <p>{this.state.status} </p>
         </div>
       );
     } else {
@@ -90,9 +104,11 @@ export default class AlbumsList extends React.Component {
             onSave={this.onSaveSelected}
           ></AlbumsListOptions>
           <div className="albums-list content">
-            {this.state.artists.map((album, i) => (
-              <AlbumCard key={i} album={album}></AlbumCard>
-            ))}
+            {this.state.artists.map((artist) => {
+              return artist.albums.map((album) => (
+                <AlbumCard key={album.id} album={album}></AlbumCard>
+              ));
+            })}
           </div>
         </div>
       );
