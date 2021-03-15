@@ -32,7 +32,7 @@ export default function AlbumsListOptions(props) {
   return (
     <div className="options-container content">
       <input
-        change={onDateChange}
+        onClick={onDateChange}
         type="date"
         value={options.searchDate}
         max={options.todayDate}
