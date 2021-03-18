@@ -94,7 +94,8 @@ export default class AlbumsList extends React.Component {
             callback={this.onOptionsChange}
             onSave={this.onSaveSelected}
           ></AlbumsListOptions>
-          <p>{this.state.status} </p>
+          <br />
+          <LoadingIcon></LoadingIcon>
         </div>
       );
     } else {
@@ -112,7 +113,6 @@ export default class AlbumsList extends React.Component {
               ));
             })}
           </div>
-          <LoadingIcon></LoadingIcon>
         </div>
       );
     }
