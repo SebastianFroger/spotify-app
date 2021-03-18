@@ -2,6 +2,8 @@ import React from "react";
 
 import AlbumsListOptions from "./AlbumsListOptions";
 import AlbumCard from "./AlbumCard";
+import LoadingIcon from "./LoadingIcon";
+
 import Sorting from "../utils/sorting";
 
 import { CookieDateHandler } from "../utils/cookieDateHandler";
@@ -110,6 +112,7 @@ export default class AlbumsList extends React.Component {
               ));
             })}
           </div>
+          <LoadingIcon></LoadingIcon>
         </div>
       );
     }
