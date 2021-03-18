@@ -7,9 +7,10 @@
   --sec-color: #30b960;
   --text-light: rgb(255, 255, 255);
   --text-dark: rgb(0, 0, 0);
-  --border-corner-radius: 2px;
+  --border-corner-radius: 3px;
   --title-font: "Londrina Outline";
   --dot-color: 100, 100, 100; 
+  --sel-color: rgba(255, 255, 255, 0.589);
 }
 
 * {
@@ -140,9 +141,10 @@ button {
 
 .album-card {
   background-color: transparent;
-  margin: 1rem;
-  padding: 1rem;
+  margin: 1.5rem;
+  padding: 1.5rem;
   width: 18%;
+  border-radius: var(--border-corner-radius);
 }
 
 .img-container {
@@ -180,7 +182,7 @@ button {
 }
 
 .card-selected {
-  box-shadow: 0 0 1rem 0.5rem var(--main-color-light);
+  background-color: var(--main-color-light);
 }
 
 /* ======================= Loading icon ======================== */

@@ -39,7 +39,7 @@ export default class AlbumsList extends React.Component {
     if (this.state.artists === null) {
       const unsorted = await fetchFollowedArtists();
       const sorted = Sorting.sortArtistsByName(unsorted);
-      this.setState({ artists: sorted.slice(0, 10) });
+      this.setState({ artists: sorted.slice(0, 50) });
     }
 
     // get albums until a certain date
