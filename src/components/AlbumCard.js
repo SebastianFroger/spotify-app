@@ -3,10 +3,9 @@ import { ReactComponent as PlayButton } from "../images/play-solid.svg";
 
 export default function AlbumCard(props) {
   const [selected, setSelected] = useState(false);
-
   const name = props.album.name;
   const artist = props.album.artists.map((a) => a.name).join();
-  const img = props.album.images[1].url;
+  const img = props.album.images[0].url;
   const date = props.album.release_date;
 
   const handleSelect = () => {

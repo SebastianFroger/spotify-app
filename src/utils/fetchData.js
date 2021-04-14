@@ -45,39 +45,43 @@ export async function fetchFollowedArtists() {
     } while (data.artists.items.length > 0);
 
     return stored;
-  } catch (err) {
+  } catch (error) {
     console.log("error fetching followed artists");
-    console.log(err);
-    return err;
+    console.log(error);
+    return error;
   }
 }
 
-export async function fetchAlbums(artistId, searchDate, offset = 0) {
+export async function fetchAlbums(artistId, limit = 25) {
+  console.log("fetching albums");
+
   // set fetch params first
   const params = JSON.parse(localStorage.getItem("params"));
   const url = new URL(`https://api.spotify.com/v1/artists/${artistId}/albums`);
-  url.searchParams.append("type", artistId);
+  url.searchParams.append("type", "application/json");
   url.searchParams.append("include_groups", "album,single,");
-  url.searchParams.append("offset", offset);
-  url.searchParams.append("limit", 1);
+  url.searchParams.append("offset", 0);
+  url.searchParams.append("limit", limit);
   url.searchParams.append("market", "from_token");
-  const header = { Authorization: "Bearer " + params.access_token };
-
-  // do a recursive call
-  const fetchData = async (url, searchDate, result = []) => {
-    try {
-      const response = await fetch(url, { headers: header });
-      const data = await response.json();
-      result.push(data.items[0]);
-
-      if (data.next !== null && data.items[0].release_date > searchDate) {
-        return fetchData(data.next, searchDate, result);
-      }
-      return result;
-    } catch (error) {
-      console.log(error);
-    }
+  const header = {
+    Authorization: "Bearer " + params.access_token,
   };
 
-  return await fetchData(url, searchDate);
+  try {
+    let response = await fetch(url, { headers: header });
+    const data = await response.json();
+    return data.items;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// get all artists albums using promises
+export async function fetchMultipleAlbums(artists) {
+  const requests = artists.map((artist) => fetchAlbums(artist.id));
+
+  const res = await Promise.all(requests);
+  console.log(res);
+
+  return res;
 }

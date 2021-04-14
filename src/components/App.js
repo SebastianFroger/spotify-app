@@ -1,13 +1,13 @@
 import React from "react";
 
 import Header from "./Header";
-import AlbumsList from "./AlbumsList";
+import AlbumsView from "./AlbumsView";
 
 export default function App() {
   return (
     <div>
       <Header></Header>
-      <AlbumsList></AlbumsList>
+      <AlbumsView></AlbumsView>
     </div>
   );
 }
