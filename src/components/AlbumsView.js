@@ -6,24 +6,32 @@ import LoadingIcon from "./LoadingIcon";
 
 import { CookieDateHandler } from "../utils/cookieDateHandler";
 import { fetchFollowedArtists, fetchMultipleAlbums } from "../utils/fetchData";
-import { sortArtistsByName, sortAlbumsByDate } from "../utils/sorting";
+import {
+  sortArtistsByName,
+  sortAlbumsByDate,
+  validateAlbumDate,
+} from "../utils/sorting";
 
 export default class AlbumsView extends React.Component {
   constructor(props) {
     super(props);
 
+    this.artistIds = [];
+    this.albums = [];
+
     this.state = {
       options: {
         lastVisitDate: CookieDateHandler.getLastVisit(),
-        searchDate: CookieDateHandler.getLastVisit(),
+        // searchDate: CookieDateHandler.getLastVisit(),
+        searchDate: "2019-01-01",
         todayDate: CookieDateHandler.getDate(),
         showAlbums: true,
         showSingles: false,
         selectAll: false,
-        fetchCount: 10,
+        fetchCount: 2,
       },
-      artistsIds: [],
-      albums: [],
+      validAlbums: [],
+      status: "loading",
     };
   }
 
@@ -32,32 +40,41 @@ export default class AlbumsView extends React.Component {
   }
 
   async fetchInitialData() {
-    const artists = await fetchFollowedArtists();
-    const sortedArtists = await sortArtistsByName(artists);
-    const albums = await fetchMultipleAlbums(
-      sortedArtists.slice(0, this.state.options.fetchCount)
-    );
-    const sortedAlbums = await albums.map((albums) => {
-      return sortAlbumsByDate(albums);
-    });
-
-    this.setState({ artistsIds: artists, albums: sortedAlbums });
+    const result = await fetchFollowedArtists();
+    this.artistIds = sortArtistsByName(result);
+    this.fetchData();
   }
 
-  fetchAdditionalData = async () => {
-    const start = this.state.albums.length;
+  fetchData = async () => {
+    const start = this.albums.length;
     const end = start + this.state.options.fetchCount;
 
-    const ids = this.state.artistsIds.slice(start, end);
+    const ids = this.artistIds.slice(start, end);
     const newAlbums = await fetchMultipleAlbums(ids);
-    const sortedAlbums = await newAlbums.map((albums) => {
+    const sortedAlbums = newAlbums.map((albums) => {
       return sortAlbumsByDate(albums);
     });
 
-    console.log("sortedAlbums", sortedAlbums);
-    // add to albums
-    const newAlbumsArr = this.state.albums.concat(sortedAlbums);
-    this.setState({ albums: newAlbumsArr });
+    sortedAlbums.forEach((albums) => {
+      this.albums = this.albums.concat(albums);
+    });
+
+    this.updateValidAlbums();
+  };
+
+  updateValidAlbums = async () => {
+    // sort by date and add to state
+    const validAlbums = this.albums.filter(
+      (album) =>
+        validateAlbumDate(this.state.options.searchDate, album) === true
+    );
+
+    this.setState({ validAlbums: validAlbums, status: "ok" });
+
+    console.log("validAlbums", validAlbums);
+    validAlbums.forEach((album) => {
+      console.log(album.release_date);
+    });
   };
 
   onOptionsChange = (options) => {
@@ -74,7 +91,7 @@ export default class AlbumsView extends React.Component {
   };
 
   render() {
-    if (this.state.albums.length === 0) {
+    if (this.state.status === "loading") {
       return (
         <div>
           <AlbumsListOptions
@@ -86,7 +103,7 @@ export default class AlbumsView extends React.Component {
           <LoadingIcon></LoadingIcon>
         </div>
       );
-    } else {
+    } else if (this.state.status === "ok") {
       return (
         <div>
           <AlbumsListOptions
@@ -94,8 +111,8 @@ export default class AlbumsView extends React.Component {
             callback={this.onOptionsChange}
             onSave={this.onSaveSelected}
           ></AlbumsListOptions>
-          <AlbumsList data={this.state.albums}></AlbumsList>
-          <button onClick={this.fetchAdditionalData}>Load more</button>
+          <AlbumsList albums={this.state.validAlbums}></AlbumsList>
+          <button onClick={this.fetchData}>Load more</button>
         </div>
       );
     }

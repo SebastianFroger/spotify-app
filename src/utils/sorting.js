@@ -43,12 +43,23 @@ export function sortAlbumsByDate(albums) {
   });
 }
 
-export function validateAlbumDate(searchDate, releaseDate, datePrecision) {
-  if (datePrecision === "day" && releaseDate >= searchDate) return true;
-  if (datePrecision === "year" && releaseDate >= searchDate.slice(0, 4))
+export function validateAlbumDate(searchDate, album) {
+  if (album.release_date_precision === "day" && album.release_date > searchDate)
+    return true;
+  if (
+    album.release_date_precision === "year" &&
+    album.release_date > searchDate.slice(0, 4)
+  )
     return true;
   return false;
 }
+
+// export function validateAlbumDate(searchDate, releaseDate, datePrecision) {
+//   if (datePrecision === "day" && releaseDate >= searchDate) return true;
+//   if (datePrecision === "year" && releaseDate >= searchDate.slice(0, 4))
+//     return true;
+//   return false;
+// }
 
 // export function sortAlbumsReleasedSince(artists, albums, date) {
 //   for (let i = artists.length - 1; i >= 0; i--) {
