@@ -54,23 +54,8 @@ export function validateAlbumDate(searchDate, album) {
   return false;
 }
 
-// export function validateAlbumDate(searchDate, releaseDate, datePrecision) {
-//   if (datePrecision === "day" && releaseDate >= searchDate) return true;
-//   if (datePrecision === "year" && releaseDate >= searchDate.slice(0, 4))
-//     return true;
-//   return false;
-// }
-
-// export function sortAlbumsReleasedSince(artists, albums, date) {
-//   for (let i = artists.length - 1; i >= 0; i--) {
-//     artists[i].albums = albums[i].items.filter(
-//       (a) => Date.parse(a.release_date) > Date.parse(date)
-//     );
-
-//     if (artists[i].albums.length === 0) {
-//       artists.splice(i, 1);
-//     }
-//   }
-
-//   return artists;
-// }
+export function validateAlbumType(options, album) {
+  if (options.showAlbums && album.album_type === "album") return true;
+  if (options.showSingles && album.album_type === "single") return true;
+  return false;
+}

@@ -10,6 +10,7 @@ import {
   sortArtistsByName,
   sortAlbumsByDate,
   validateAlbumDate,
+  validateAlbumType,
 } from "../utils/sorting";
 
 export default class AlbumsView extends React.Component {
@@ -23,7 +24,7 @@ export default class AlbumsView extends React.Component {
       options: {
         lastVisitDate: CookieDateHandler.getLastVisit(),
         // searchDate: CookieDateHandler.getLastVisit(),
-        searchDate: "2019-01-01",
+        searchDate: "2010-01-01",
         todayDate: CookieDateHandler.getDate(),
         showAlbums: true,
         showSingles: false,
@@ -66,7 +67,8 @@ export default class AlbumsView extends React.Component {
     // sort by date and add to state
     const validAlbums = this.albums.filter(
       (album) =>
-        validateAlbumDate(this.state.options.searchDate, album) === true
+        validateAlbumType(this.state.options, album) &&
+        validateAlbumDate(this.state.options.searchDate, album)
     );
 
     this.setState({ validAlbums: validAlbums, status: "ok" });
@@ -78,12 +80,8 @@ export default class AlbumsView extends React.Component {
   };
 
   onOptionsChange = (options) => {
-    console.log("options changed", options);
     this.setState({ ...this.state, options: options });
-
-    if (this.state.options.searchDate !== options.searchDate) {
-      this.getAlbums();
-    }
+    this.updateValidAlbums();
   };
 
   onSaveSelected = (e) => {
