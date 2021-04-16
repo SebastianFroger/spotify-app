@@ -5,8 +5,8 @@
   --main-color-light: rgb(78, 78, 78);
   --line-color: rgb(78, 78, 78);
   --sec-color: #30b960;
-  --text-light: rgb(255, 255, 255);
-  --text-grey: rgb(175, 175, 175);
+  --text-light: rgb(245, 245, 245);
+  --text-grey: rgb(156, 156, 156);
   --text-dark: rgb(0, 0, 0);
   --border-corner-radius: 3px;
   --title-font: "Londrina Outline";
@@ -183,7 +183,7 @@ button {
 }
 
 .small-font {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--text-grey);
   padding-right: 0.8rem;
 }
@@ -191,7 +191,7 @@ button {
 .play-button {
   width: 8%;
   margin: auto;
-  fill: var(--main-color-light);
+  fill: var(--text-grey);
 }
 
 .card-selected {

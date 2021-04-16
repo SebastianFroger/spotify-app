@@ -1,7 +1,7 @@
 import React from "react";
 
 import AlbumsListOptions from "./AlbumsListOptions";
-import AlbumsList from "./AlbumsList";
+import AlbumCard from "./AlbumCard";
 import LoadingIcon from "./LoadingIcon";
 
 import { CookieDateHandler } from "../utils/cookieDateHandler";
@@ -102,17 +102,34 @@ export default class AlbumsView extends React.Component {
         </div>
       );
     } else if (this.state.status === "ok") {
-      return (
-        <div>
-          <AlbumsListOptions
-            options={this.state.options}
-            callback={this.onOptionsChange}
-            onSave={this.onSaveSelected}
-          ></AlbumsListOptions>
-          <AlbumsList albums={this.state.validAlbums}></AlbumsList>
-          <button onClick={this.fetchData}>Load more</button>
-        </div>
-      );
+      if (this.state.validAlbums.length === 0) {
+        return (
+          <div className="albums-list content">
+            <AlbumsListOptions
+              options={this.state.options}
+              callback={this.onOptionsChange}
+              onSave={this.onSaveSelected}
+            ></AlbumsListOptions>
+            <p>Nothing to show. </p>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <AlbumsListOptions
+              options={this.state.options}
+              callback={this.onOptionsChange}
+              onSave={this.onSaveSelected}
+            ></AlbumsListOptions>
+            <div className="albums-list content">
+              {this.state.validAlbums.map((album) => {
+                return <AlbumCard key={album.id} album={album}></AlbumCard>;
+              })}
+            </div>
+            <button onClick={this.fetchData}>Load more</button>
+          </div>
+        );
+      }
     }
   }
 }
