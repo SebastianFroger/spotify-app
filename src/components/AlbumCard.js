@@ -7,6 +7,7 @@ export default function AlbumCard(props) {
   const artist = props.album.artists.map((a) => a.name).join();
   const img = props.album.images[0].url;
   const date = props.album.release_date;
+  const type = props.album.album_type;
 
   const handleSelect = () => {
     setSelected((selected) => !selected);
@@ -23,10 +24,15 @@ export default function AlbumCard(props) {
       </div>
       <div className="card-bottom">
         <div>
-          <p>{name}</p>
-          <p>{artist}</p>
-          <p>{date}</p>
+          <p className={"big-font"}>{name}</p>
+          <p className={"big-font"}>{artist}</p>
         </div>
+        <br />
+      </div>
+      <div className="card-bottom">
+        <p className={"small-font"}>{type}</p>
+        <p className={"small-font"}>{date}</p>
+
         <PlayButton className="play-button"></PlayButton>
       </div>
     </div>
