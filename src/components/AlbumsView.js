@@ -24,13 +24,14 @@ export default class AlbumsView extends React.Component {
       options: {
         lastVisitDate: CookieDateHandler.getLastVisit(),
         // searchDate: CookieDateHandler.getLastVisit(),
-        searchDate: "2010-01-01",
+        searchDate: "2021-01-01",
         todayDate: CookieDateHandler.getDate(),
         showAlbums: true,
         showSingles: false,
         selectAll: false,
-        fetchCount: 2,
+        fetchAmount: 20, // api limit is 20 ids
       },
+      fetchCount: 0,
       validAlbums: [],
       status: "loading",
     };
@@ -47,8 +48,8 @@ export default class AlbumsView extends React.Component {
   }
 
   fetchData = async () => {
-    const start = this.albums.length;
-    const end = start + this.state.options.fetchCount;
+    const start = this.state.fetchCount * this.state.options.fetchAmount;
+    const end = start + this.state.options.fetchAmount;
 
     const ids = this.artistIds.slice(start, end);
     const newAlbums = await fetchMultipleAlbums(ids);
@@ -60,11 +61,14 @@ export default class AlbumsView extends React.Component {
       this.albums = this.albums.concat(albums);
     });
 
-    this.updateValidAlbums();
+    const count = this.state.fetchCount + 1;
+    this.setState({ fetchCount: count });
+
+    this.updateAlbumsDisplay();
   };
 
-  updateValidAlbums = async () => {
-    // sort by date and add to state
+  // sort by date and add to state
+  updateAlbumsDisplay = async () => {
     const validAlbums = this.albums.filter(
       (album) =>
         validateAlbumType(this.state.options, album) &&
@@ -72,16 +76,12 @@ export default class AlbumsView extends React.Component {
     );
 
     this.setState({ validAlbums: validAlbums, status: "ok" });
-
-    console.log("validAlbums", validAlbums);
-    validAlbums.forEach((album) => {
-      console.log(album.release_date);
-    });
   };
 
+  // set options to state
   onOptionsChange = (options) => {
     this.setState({ ...this.state, options: options });
-    this.updateValidAlbums();
+    this.updateAlbumsDisplay();
   };
 
   onSaveSelected = (e) => {
@@ -104,13 +104,13 @@ export default class AlbumsView extends React.Component {
     } else if (this.state.status === "ok") {
       if (this.state.validAlbums.length === 0) {
         return (
-          <div className="albums-list content">
+          <div>
             <AlbumsListOptions
               options={this.state.options}
               callback={this.onOptionsChange}
               onSave={this.onSaveSelected}
             ></AlbumsListOptions>
-            <p>Nothing to show. </p>
+            <p className="albums-list content">Nothing to show. </p>
           </div>
         );
       } else {
@@ -121,9 +121,10 @@ export default class AlbumsView extends React.Component {
               callback={this.onOptionsChange}
               onSave={this.onSaveSelected}
             ></AlbumsListOptions>
+            <button onClick={this.fetchData}>Load more</button>
             <div className="albums-list content">
-              {this.state.validAlbums.map((album) => {
-                return <AlbumCard key={album.id} album={album}></AlbumCard>;
+              {this.state.validAlbums.map((album, i) => {
+                return <AlbumCard key={i} album={album}></AlbumCard>;
               })}
             </div>
             <button onClick={this.fetchData}>Load more</button>

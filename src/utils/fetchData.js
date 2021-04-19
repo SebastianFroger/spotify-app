@@ -52,9 +52,18 @@ export async function fetchFollowedArtists() {
   }
 }
 
-export async function fetchAlbums(artistId, limit = 25) {
-  console.log("fetching albums");
+// get all artists albums using promises
+export async function fetchMultipleAlbums(artists) {
+  const requests = artists.map((artist) => fetchAlbums(artist.id));
 
+  const res = await Promise.all(requests);
+  console.log(res);
+  console.log("fetched albums", res);
+
+  return res;
+}
+
+export async function fetchAlbums(artistId, limit = 50) {
   // set fetch params first
   const params = JSON.parse(localStorage.getItem("params"));
   const url = new URL(`https://api.spotify.com/v1/artists/${artistId}/albums`);
@@ -63,25 +72,65 @@ export async function fetchAlbums(artistId, limit = 25) {
   url.searchParams.append("offset", 0);
   url.searchParams.append("limit", limit);
   url.searchParams.append("market", "from_token");
-  const header = {
+  const headers = {
     Authorization: "Bearer " + params.access_token,
   };
 
   try {
-    let response = await fetch(url, { headers: header });
-    const data = await response.json();
-    return data.items;
+    let albums = [];
+    albums = await fetchAlbumsRecursive(url, headers, albums);
+    return albums;
   } catch (error) {
     console.log(error);
   }
 }
 
-// get all artists albums using promises
-export async function fetchMultipleAlbums(artists) {
-  const requests = artists.map((artist) => fetchAlbums(artist.id));
+// do a recursive search
+async function fetchAlbumsRecursive(url, headers, albums = []) {
+  try {
+    let response = await fetch(url, { headers: headers });
 
-  const res = await Promise.all(requests);
-  console.log(res);
+    // add data to results
+    if (response.status === 200) {
+      const data = await response.json();
+      albums = albums.concat(data.items);
 
-  return res;
+      console.log(response.status, data.items[0].artists[0].name, data.items);
+
+      if (data.next !== null) {
+        return await fetchAlbumsRecursive(data.next, headers, albums);
+      }
+
+      if (response.status !== 200) {
+        console.log(response.status);
+        // if erroCode 429 try setTimeout with waitime in response
+      }
+
+      return albums;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+// export async function fetchAlbums(artistId, limit = 50) {
+//   // set fetch params first
+//   const params = JSON.parse(localStorage.getItem("params"));
+//   const url = new URL(`https://api.spotify.com/v1/artists/${artistId}/albums`);
+//   url.searchParams.append("type", "application/json");
+//   url.searchParams.append("include_groups", "album,single,");
+//   url.searchParams.append("offset", 0);
+//   url.searchParams.append("limit", limit);
+//   url.searchParams.append("market", "from_token");
+//   const header = {
+//     Authorization: "Bearer " + params.access_token,
+//   };
+
+//   try {
+//     let response = await fetch(url, { headers: header });
+//     const data = await response.json();
+//     return data.items;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
