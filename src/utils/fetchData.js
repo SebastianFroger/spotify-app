@@ -55,12 +55,10 @@ export async function fetchFollowedArtists() {
 // get all artists albums using promises
 export async function fetchMultipleAlbums(artists) {
   const requests = artists.map((artist) => fetchAlbums(artist.id));
+  const albums = await Promise.all(requests);
 
-  const res = await Promise.all(requests);
-  console.log(res);
-  console.log("fetched albums", res);
-
-  return res;
+  const reducer = (accumulator, albums) => accumulator.concat(albums);
+  return albums.reduce(reducer);
 }
 
 export async function fetchAlbums(artistId, limit = 50) {
@@ -95,8 +93,6 @@ async function fetchAlbumsRecursive(url, headers, albums = []) {
       const data = await response.json();
       albums = albums.concat(data.items);
 
-      console.log(response.status, data.items[0].artists[0].name, data.items);
-
       if (data.next !== null) {
         return await fetchAlbumsRecursive(data.next, headers, albums);
       }
@@ -112,25 +108,3 @@ async function fetchAlbumsRecursive(url, headers, albums = []) {
     console.log(error);
   }
 }
-
-// export async function fetchAlbums(artistId, limit = 50) {
-//   // set fetch params first
-//   const params = JSON.parse(localStorage.getItem("params"));
-//   const url = new URL(`https://api.spotify.com/v1/artists/${artistId}/albums`);
-//   url.searchParams.append("type", "application/json");
-//   url.searchParams.append("include_groups", "album,single,");
-//   url.searchParams.append("offset", 0);
-//   url.searchParams.append("limit", limit);
-//   url.searchParams.append("market", "from_token");
-//   const header = {
-//     Authorization: "Bearer " + params.access_token,
-//   };
-
-//   try {
-//     let response = await fetch(url, { headers: header });
-//     const data = await response.json();
-//     return data.items;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }

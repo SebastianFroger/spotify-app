@@ -1,16 +1,16 @@
-import React, { useState } from "react";
 import { ReactComponent as PlayButton } from "../images/play-solid.svg";
 
 export default function AlbumCard(props) {
-  const [selected, setSelected] = useState(false);
+  const selected = props.album.selected;
   const name = props.album.name;
   const artist = props.album.artists.map((a) => a.name).join();
   const img = props.album.images[0].url;
   const date = props.album.release_date;
   const type = props.album.album_type;
+  const id = props.album.id;
 
   const handleSelect = () => {
-    setSelected((selected) => !selected);
+    props.onSelect(id);
   };
 
   return (

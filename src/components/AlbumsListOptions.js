@@ -17,6 +17,7 @@ export default function AlbumsListOptions(props) {
   const onSelectAllChange = () => {
     options.selectAll = !options.selectAll;
     props.callback(options);
+    props.onSelect(options.selectAll);
   };
 
   const onDateChange = (e) => {

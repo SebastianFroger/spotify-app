@@ -48,20 +48,20 @@ export default class AlbumsView extends React.Component {
   }
 
   fetchData = async () => {
+    // fetch next array of artist albums
     const start = this.state.fetchCount * this.state.options.fetchAmount;
     const end = start + this.state.options.fetchAmount;
-
     const ids = this.artistIds.slice(start, end);
     const newAlbums = await fetchMultipleAlbums(ids);
-    const sortedAlbums = newAlbums.map((albums) => {
-      return sortAlbumsByDate(albums);
-    });
 
-    sortedAlbums.forEach((albums) => {
-      this.albums = this.albums.concat(albums);
-    });
+    // add selection bool
+    newAlbums.forEach((a) => (a.selected = false));
 
+    // sort data
+    this.albums = this.albums.concat(sortAlbumsByDate(newAlbums));
     const count = this.state.fetchCount + 1;
+
+    //add to state
     this.setState({ fetchCount: count });
 
     this.updateAlbumsDisplay();
@@ -84,6 +84,19 @@ export default class AlbumsView extends React.Component {
     this.updateAlbumsDisplay();
   };
 
+  onSelectToggle = (toggle) => {
+    const albums = this.state.validAlbums.slice();
+    albums.forEach((a) => (a.selected = toggle));
+    this.setState({ validAlbums: albums });
+  };
+
+  onSingleAlbumSelect = (id) => {
+    const albums = this.state.validAlbums.slice();
+    const album = this.albums.find((e) => e.id === id);
+    album.selected = !album.selected;
+    this.setState({ validAlbums: albums });
+  };
+
   onSaveSelected = (e) => {
     console.log("save selected", e);
   };
@@ -96,6 +109,7 @@ export default class AlbumsView extends React.Component {
             options={this.state.options}
             callback={this.onOptionsChange}
             onSave={this.onSaveSelected}
+            onSelect={this.onSelectToggle}
           ></AlbumsListOptions>
           <br />
           <LoadingIcon></LoadingIcon>
@@ -109,6 +123,7 @@ export default class AlbumsView extends React.Component {
               options={this.state.options}
               callback={this.onOptionsChange}
               onSave={this.onSaveSelected}
+              onSelect={this.onSelectToggle}
             ></AlbumsListOptions>
             <p className="albums-list content">Nothing to show. </p>
           </div>
@@ -120,11 +135,17 @@ export default class AlbumsView extends React.Component {
               options={this.state.options}
               callback={this.onOptionsChange}
               onSave={this.onSaveSelected}
+              onSelect={this.onSelectToggle}
             ></AlbumsListOptions>
-            <button onClick={this.fetchData}>Load more</button>
             <div className="albums-list content">
               {this.state.validAlbums.map((album, i) => {
-                return <AlbumCard key={i} album={album}></AlbumCard>;
+                return (
+                  <AlbumCard
+                    key={i}
+                    album={album}
+                    onSelect={this.onSingleAlbumSelect}
+                  ></AlbumCard>
+                );
               })}
             </div>
             <button onClick={this.fetchData}>Load more</button>
